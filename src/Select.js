@@ -84,6 +84,10 @@ class Select extends React.Component {
 		if (this.props.autoFocus || this.props.autofocus) {
 			this.focus();
 		}
+
+    if (this.props.keepInputValue && this.props.value) {
+      this.setState({ inputValue: this.handleInputValueChange(this.props.value[this.props.labelKey])});
+    }
 	}
 
 	componentWillReceiveProps (nextProps) {
@@ -97,6 +101,10 @@ class Select extends React.Component {
 			// Used to be required but it's not any more
 			this.setState({ required: false });
 		}
+
+    if (this.props.keepInputValue && this.props.value !== nextProps.value) {
+      this.setState({ inputValue: this.handleInputValueChange(nextProps.value[this.props.labelKey])});
+    }
 	}
 
 	componentWillUpdate (nextProps, nextState) {
